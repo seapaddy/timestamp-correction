@@ -1,4 +1,5 @@
-Timestamp correction apple mac
+### Timestamp correction export photos Apple Mac
 
-When photos are downloaded as jpeg from iphoto, their creation date is set to the time exported.
-This bash script modifies the timestamp to the original creation date by looking at the meta data when available.
+Exporting photos from Apples photos application, sets their creation date to the time exported.  
+redateImg.sh bash script modifies the timestamp to the original creation date if present in meta
+data.
