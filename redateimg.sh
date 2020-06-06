@@ -27,15 +27,14 @@ function redate {
 	# get metadata creation date and format
 	date="$(mdls -name kMDItemContentCreationDate "$file" | \
 		awk '{gsub("-",""); gsub(":",""); print $3 substr($4, 1, 4)}')"
-	echo "$date"
+	echo "$file" "$date"
 
 	# check year is after 'beginning of time'
 	year="${date:0:4}"
-	if [ "$year" -lt "$cutoff" ]; then
-		touch -t "$beginning_of_time" "$file"
-	else
+	[ "$year" -lt "$cutoff" ] && \
+		touch -t "$beginning_of_time" "$file" || \
 		touch -t $date $file
-	fi
+
 }
 
 ### process options
@@ -50,16 +49,16 @@ done
 # separate file extensions list into array
 IFS=', ' read -ra file_extensions <<< "$file_extensions"
 
+# check mdls is installed
+if [ mdls ]; then
+	echo "mdls not installed (metadata lists required)"
+	exit 2
+fi
+
 # check directory exists
 if [ ! -d "$directory" ]; then
 	usage
 	exit 1
-fi
-
-# check mdls is installed
-if [ mdls ]; then
-	echo 'mdls program is required to get meta data from files'
-	exit 2
 fi
 
 # loop through file with chosen extensions
