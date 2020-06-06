@@ -52,7 +52,7 @@ IFS=', ' read -ra file_extensions <<< "$file_extensions"
 # check mdls is installed
 if [ mdls ]; then
 	echo "mdls not installed (metadata lists required)"
-	exit 2
+	exit 1
 fi
 
 # check directory exists
