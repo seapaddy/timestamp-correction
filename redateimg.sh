@@ -1,10 +1,10 @@
 #!/bin/bash
 
-### readonly variables
+# readonly variables
 readonly cutoff="1980"
 readonly beginning_of_time="198001010001"
 
-### default variables
+# default variables
 directory=""
 file_extensions="png,jpeg,jpg"
 
@@ -37,7 +37,7 @@ function redate {
 
 }
 
-### process options
+# process options
 while getopts d:e:h opt
 do
 	case "$opt" in
